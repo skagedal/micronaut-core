@@ -7,7 +7,6 @@ import io.micronaut.http.bind.binders.AnnotatedRequestArgumentBinder;
 import io.micronaut.http.filter.OncePerRequestHttpServerFilter;
 import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.filters.SecurityFilter;
-
 import java.util.Map;
 import java.util.Optional;
 
@@ -48,7 +47,7 @@ public class TestValueAnnotationBinder implements AnnotatedRequestArgumentBinder
         if (request.getAttributes().contains(OncePerRequestHttpServerFilter.getKey(SecurityFilter.class))) {
             final Optional<Authentication> authentication = request.getUserPrincipal(Authentication.class);
             if (authentication.isPresent()) {
-                Map<String, Object> roles = authentication.get().getAttributes().containsKey('roles');
+                Map<String, Object> roles = (Map<String, Object>) authentication.get().getAttributes().get("roles");
                 if (roles.isEmpty()) {
                     return BindingResult.EMPTY; // satisfied
                 } else {
