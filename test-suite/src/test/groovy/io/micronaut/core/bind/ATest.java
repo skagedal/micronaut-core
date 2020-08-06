@@ -16,6 +16,7 @@
 package io.micronaut.core.bind;
 
 import edu.umd.cs.findbugs.annotations.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
@@ -25,16 +26,22 @@ import java.io.Serializable;
  * @author Cindy Turpin
  * @since 2.x
  */
-public interface ATest extends Comparable<ATest>, Serializable {
+public class ATest implements Comparable<ATest>, Serializable {
 
-    /**
-     * @return The name of the aTest
-     */
-    @NonNull String getName();
 
-    /**
-     * @return The value of the aTest
-     */
-    @NonNull String getValue();
+    @Override
+    public int compareTo(@NotNull ATest o) {
+        return 0;
+    }
+
+    @NotNull
+    public String getName() {
+        return null;
+    }
+
+    @NotNull
+    public String getValue() {
+        return null;
+    }
 
 }
